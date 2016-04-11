@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,12 @@ namespace AgileProject.Controllers
     {
         public ActionResult Index()
         {
+
+            var user = User.Identity.Name;
+            if (user != "")
+            {
+                ViewBag.Message = "User";
+            }
             return View();
         }
 
