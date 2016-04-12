@@ -155,6 +155,10 @@ textarea {
 	.innerDivUser {
 		width: 50%;
 	}
+
+	.inputTime {
+		margin-bottom:5px;
+	}
 }
 @media only screen and (max-width: 360px) {
 	.innerDiv span {
