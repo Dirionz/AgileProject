@@ -2,43 +2,52 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="col-md-4 col-lg-12">
-    <span>Name</span>
-    <span>Status</span>
-    <span>Back in</span>
-</div>
+
+@*<div class="col-md-12 col-lg-12" style="margin-top:15px;">
+	<span class="columnTitle">Name</span>
+	<span>Status</span>
+	<span>Back in</span>
+</div>*@
 
 <div class="row">
-    @if (ViewBag.Message == "User")
-    {
-    <div class="col-md-4 col-lg-12">
-        <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded" style="width: 140px; height: auto; display:inline-block" />
-        <span>Login Testing Testsson</span>
-        <span>Busy</span>
-        <span>13:00</span>
-        <div class="dropdown" style="display:inline-block">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                Dropdown Example
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">HTML</a></li>
-                <li><a href="#">CSS</a></li>
-                <li><a href="#">JavaScript</a></li>
-            </ul>
-        </div>
-        <input type="text" placeholder="2016/04/05" />
-        <input type="text" placeholder="13:00" />
+	@if (ViewBag.Message == "User")
+	{
+		<div class="col-md-12 col-lg-12 userInfo">
+			<div class="imageDiv">
+				<img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
+			</div>
+			<div class="innerDivUser">
+				<span>Inlogged Testsson</span>
+				<div class="dropdown ddStatus">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+						Dropdown Example
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="#">Available</a></li>
+						<li><a href="#">Busy</a></li>
+						<li><a href="#">Busy (Students)</a></li>
+						<li><a href="#">Away</a></li>
+					</ul>
+				</div>
+				<input type="text" class="inputTime" placeholder="2016/04/05" />
+				<input type="text" class="inputTime" placeholder="13:00" />
+			</div>
+		</div>
 
-    </div>
-    }
-    @for (int i = 0; i < 3; i++)
-    {
-        <div class="col-md-4 col-lg-12">
-            <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded" style="width: 140px; height: auto; display:inline-block" />
-            <span>Testing Testsson</span>
-            <span>Busy</span>
-            <span>13:00</span>
-        </div>
-    }
+	}
+	@for (int i = 0; i < 3; i++)
+	{
+		<div class="col-sm-12 col-md-12 col-lg-12 listItem">
+			<div class="imageDiv">
+				<img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
+			</div>
+
+			<div class="innerDiv">
+				<span class="listName">Testing Testsson</span>
+				<span class="listStatus">Busy</span>
+				<span class="listTime"><b>Back - 13:00</b></span> @*FRÅGA: Bara visa tid om idag, annars datum? *@
+			</div>
+		</div>
+	}
 </div>
