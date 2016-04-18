@@ -11,37 +11,30 @@
 </div>*@
 
 <div class="row">
-	@if (ViewBag.LoggedInUser)
-	{
+	@if (ViewBag.LoggedInUser != null)
+    {
 		<div class="col-md-12 col-lg-12 userInfo">
 			<div class="imageDiv">
 				<img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
 			</div>
 			<div class="innerDivUser">
 				<span>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</span>
-				@*<div class="dropdown ddStatus">
-					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="#">Available</a></li>
-						<li><a href="#">Busy</a></li>
-						<li><a href="#">Busy (Students)</a></li>
-						<li><a href="#">Away</a></li>
-					</ul>
-				</div>*@
-                <select class="form-control">
-                    <option value="Available">Available</option>
-                    <option value="Busy">Busy</option>
-                    <option value="Busy (Students)">Busy (Students)</option>
-                    <option value="Away">Away</option>
-                </select>
-				<input type="text" class="inputTime" placeholder="2016/04/05" />
-				<input type="text" class="inputTime" placeholder="13:00" />
-			</div>
+                <br />
+                <div class="btn-group ddStatus">
+                    <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="select">
+                        <li><a href="#">Available</a></li>
+                        <li><a href="#">Busy</a></li>
+                        <li><a href="#">Busy (Students)</a></li>
+                        <li><a href="#">Away</a></li>
+                      </ul>
+                </div>
+                <br>
+				<input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
+            </div>
 		</div>
 
-	}
+    }
 
     @foreach (AgileProject.Models.Teacher teacher in Model)
     {
@@ -56,6 +49,36 @@
 				<span class="listTime"><b>Back - 13:00</b></span> @*FRÅGA: Bara visa tid om idag, annars datum? *@
 			</div>
 		</div>
-	}
+    }
+    
 </div>
+<script>
+
+    $(document).ready(function () {
+
+        $(".dropdown-menu li a").click(function () {
+            var selText = $(this).text();
+            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
+            console.log(selText);
+;            if (selText == 'Available') {
+                $('.btn-primary').css('background-color', 'rgba(81,202,66,1)');
+                $('.btn-primary').css('border-color', 'rgb(53, 189, 80)');
+            }
+            else if (selText == 'Busy') {
+                $('.btn-primary').css('background-color', 'rgb(189, 53, 53)');
+                $('.btn-primary').css('border-color', 'rgb(202, 66, 66)');
+            }
+            else if (selText == 'Busy (Students)') {
+                $('.btn-primary').css('background-color', 'rgb(202, 116, 66)');
+                $('.btn-primary').css('border-color', 'rgb(189, 100, 53)');
+            }
+            else if (selText == 'Away') {
+               
+                $('.btn-primary').css('background-color', 'rgb(202, 201, 66)');
+                $('.btn-primary').css('border-color', 'rgb(202, 170, 66)');
+            }
+        });
+    });
+
+</script>
 

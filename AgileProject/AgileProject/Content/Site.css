@@ -54,7 +54,8 @@ textarea {
     padding: 15px 15px;
 	background-color: #FAFAFA;
     border-radius: 5px;
-	margin-top:5px;
+	margin-top:10px;
+    border-left: 16px solid rgba(70, 255, 0, 0.56);
 }
 .imageDiv {
     width: 15%;
@@ -96,9 +97,11 @@ textarea {
 }
 
 .innerDivUser {
+    height: 125px;
 	margin-left:5px;
 	display:inline-block;
 	vertical-align:middle;
+    width: 83%;
 
 }
 .innerDivUser span {
@@ -114,10 +117,34 @@ textarea {
     padding: 5px;
 	outline:none;
 }
+.option-style{
+
+}
+.available{
+    background-color: rgba(81,202,66,1);
+}
+.busy{
+    background-color: rgb(202, 66, 66);
+}
+.busy-s{
+    background-color: rgb(202, 116, 66);
+}
+.away{
+    background-color: rgb(202, 192, 66);
+}
+.btn-group > .btn:first-child {
+    width: 160px;
+}
+.dropdown-menu > li > a:hover{
+   /*background-color: rgba(255, 255, 255, 0.19);*/
+}
 
 
 @media only screen and (max-width: 767px) {
+    .innerDivUser {
+    width: 73%;
 
+}
 
 	.imageDiv {
 		width: 20%;
@@ -150,7 +177,7 @@ textarea {
 		width:30%;
 	}
 	.innerDiv {
-		width:65%;
+		width:60%;
 	}
 	.innerDivUser {
 		width: 50%;
