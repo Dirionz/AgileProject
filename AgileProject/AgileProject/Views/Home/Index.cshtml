@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<AgileProject.Models.Teacher>
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,17 +11,16 @@
 </div>*@
 
 <div class="row">
-	@if (ViewBag.Message == "User")
+	@if (ViewBag.LoggedInUser)
 	{
 		<div class="col-md-12 col-lg-12 userInfo">
 			<div class="imageDiv">
 				<img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
 			</div>
 			<div class="innerDivUser">
-				<span>Inlogged Testsson</span>
-				<div class="dropdown ddStatus">
+				<span>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</span>
+				@*<div class="dropdown ddStatus">
 					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-						Dropdown Example
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
@@ -29,25 +29,33 @@
 						<li><a href="#">Busy (Students)</a></li>
 						<li><a href="#">Away</a></li>
 					</ul>
-				</div>
+				</div>*@
+                <select class="form-control">
+                    <option value="Available">Available</option>
+                    <option value="Busy">Busy</option>
+                    <option value="Busy (Students)">Busy (Students)</option>
+                    <option value="Away">Away</option>
+                </select>
 				<input type="text" class="inputTime" placeholder="2016/04/05" />
 				<input type="text" class="inputTime" placeholder="13:00" />
 			</div>
 		</div>
 
 	}
-	@for (int i = 0; i < 3; i++)
-	{
+
+    @foreach (AgileProject.Models.Teacher teacher in Model)
+    {
 		<div class="col-sm-12 col-md-12 col-lg-12 listItem">
 			<div class="imageDiv">
 				<img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
 			</div>
 
 			<div class="innerDiv">
-				<span class="listName">Testing Testsson</span>
+				<span class="listName">@teacher.FirstName @teacher.LastName</span>
 				<span class="listStatus">Busy</span>
 				<span class="listTime"><b>Back - 13:00</b></span> @*FRÅGA: Bara visa tid om idag, annars datum? *@
 			</div>
 		</div>
 	}
 </div>
+

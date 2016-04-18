@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using AgileProject.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,20 @@ namespace AgileProject.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
-
-            var user = User.Identity.Name;
-            if (user != "")
+            var teacherList = db.Teacher.ToList();
+            if (User.Identity.Name != "")
             {
-                ViewBag.Message = "User";
+                var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
+                ViewBag.LoggedInUser = (user != null);
+                ViewBag.teacher = teacher;
+                teacherList.Remove(teacher);
             }
-            return View();
+            return View(teacherList);
         }
 
         public ActionResult About()

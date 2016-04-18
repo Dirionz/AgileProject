@@ -24,6 +24,8 @@ namespace AgileProject.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        public DbSet<Teacher> Teacher { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         public static ApplicationDbContext Create()
         {
