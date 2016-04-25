@@ -17,6 +17,7 @@ namespace AgileProject.Controllers
         // GET: Teachers
         public ActionResult Index()
         {
+            // TODO: Only view our own "teacher"
             return View(db.Teacher.ToList());
         }
 
@@ -37,9 +38,12 @@ namespace AgileProject.Controllers
 
         // GET: Teachers/Create
         public ActionResult Create()
-        {
-
-            return View();
+        {  
+            var model = new RegisterTeacherModel
+            {
+                getCorridors = new SelectList(db.Corridors, "Id", "Name")
+            };
+            return View(model);
         }
 
         // POST: Teachers/Create
@@ -49,18 +53,25 @@ namespace AgileProject.Controllers
         [ValidateAntiForgeryToken] //[Bind(Include = "Id,FirstName,LastName,Phone,isAdmin,Corridor")] Teacher teacher
         public ActionResult Create(RegisterTeacherModel teachermodel)
         {
-            var teacher = new Teacher();
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && db.Teacher.Where(t => t.User.UserName == User.Identity.Name).ToList().Count > 0)
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-                teacher.User = user;
+                var corridor = db.Corridors.FirstOrDefault(c => c.Id == teachermodel.corridorId);
 
-                db.Teacher.Add(teacher);
+                db.Teacher.Add(new Teacher
+                {
+                    FirstName = teachermodel.FirstName,
+                    LastName = teachermodel.LastName,
+                    Phone = teachermodel.Phone,
+                    isAdmin = teachermodel.isAdmin,
+                    Corridor = corridor,
+                    User = user
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(teacher);
+            
+            return View(teachermodel);
         }
 
         // GET: Teachers/Edit/5

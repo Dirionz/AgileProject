@@ -20,7 +20,7 @@ namespace AgileProject.Helpers
             if (teacher.isAdmin)
             {
                 return true;
-            } 
+            }
             else
             {
                 return false;
