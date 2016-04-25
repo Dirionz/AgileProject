@@ -32,6 +32,7 @@ textarea {
 }
 
 .userInfo {
+    height:200px;
     margin-top: 25px;
     padding: 15px 15px;
     background-color: #222222;
@@ -39,75 +40,52 @@ textarea {
     border-radius: 5px;
     box-shadow: 0 0px 2px #999797;
 }
-.underline {
-	bottom:0;
-	border: 1px solid black;
-}
+
 .v-align{
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
-
 .listItem {
-    padding: 15px 15px;
+    height:118px;
+    padding: 15px 5px;
 	background-color: #FAFAFA;
     border-radius: 5px;
 	margin-top:10px;
+}
+.available-border{
     border-left: 16px solid rgba(70, 255, 0, 0.56);
 }
-.imageDiv {
-    width: 15%;
-    /* max-width: 140px; */
-    display: inline-block;
+.busy-border{
+    border-left: 16px solid rgba(255, 0, 0, 0.56);
 }
+
 .listImage {
-    width: 100%;
-    max-width: 140px;
+    min-width: 140px;
+    width: 140px;
     height: auto;
     display: inline-block;
 
 }
+.v-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
 
-.listName {
-	display:inline-block;
-	width:30%;
-	/*background-color:red;*/
-}
-.listStatus {
-	display:inline-block;
-	/*background-color:green;*/
-	width:30%;
-	text-align:center;
-}
-.listTime {
-	width:30%;
-	text-align:right;
-	/*background-color:orange;*/
-	display:inline-block;
-}
-.innerDiv {
-    margin-left: 10px;
-    display: inline-block;
-    /* background-color: palevioletred; */
-    width: 83%;
+
+h12 {
+    font-size: 15px;
+    display: block;
     font-family: 'Lato', sans-serif;
+}
+h11 {
     font-size: 20px;
+    display: block;
+    font-family: 'Lato', sans-serif;
 }
 
-.innerDivUser {
-    height: 125px;
-	margin-left:5px;
-	display:inline-block;
-	vertical-align:middle;
-    width: 83%;
-
-}
-.innerDivUser span {
-	font-family: 'Lato', sans-serif;
-    font-size: 22px;
-}
 .ddStatus {
 	margin:10px 0px;
 }
@@ -117,9 +95,11 @@ textarea {
     padding: 5px;
 	outline:none;
 }
-.option-style{
 
+.col-md-2.image {
+    width: 155px;
 }
+
 .available{
     background-color: rgba(81,202,66,1);
 }
@@ -138,62 +118,79 @@ textarea {
 .dropdown-menu > li > a:hover{
    /*background-color: rgba(255, 255, 255, 0.19);*/
 }
+.calldiv{
+    float: right;
+    margin-right: 20px;
+    height:100%;
+}
+
+
 
 
 @media only screen and (max-width: 767px) {
-    .innerDivUser {
-    width: 73%;
+
+    .userInfo {
+        margin-top: 0px;
+    }
+
+    .col-md-2.image {
+        width: 119px;
+    }
+    .listImage {
+        min-width: 100px;
+        width: 100px;
+    }
 
 }
+@media only screen and (max-width: 450px) {
 
-	.imageDiv {
-		width: 20%;
-	}
-	.listName {
-	    width: 100%;
-		display:block;
-	}
-	.listStatus {
-		 width: 100%;
-		display:block;
-		text-align:left;
-	}
-	.listTime {
-		width: 100%;
-		display:block;
-		text-align:left;
-	}
-	.innerDiv {
-		width:75%;
-		vertical-align: middle;
-		font-size: 16px;
-	}
+    h11{
+        font-size:16px;
 
+    }
+    h12{
+        font-size: 12px;
+
+    }
+    .col-xs-6.textinfo{
+        width:40%;
+    }
+    .listItem {
+        height: 105px;
+        padding: 0px !important;
+    }
+
+    .col-md-2.image {
+        width: 95px;
+    }
+    .listImage {
+        min-width: 80px;
+        width: 100px;
+    }
+    
+}
+
+@media only screen and (max-width: 450px) {
+
+   
+    .col-xs-6.textinfo{
+        width:70%;
+    }
+    .listItem {
+        height: 105px;
+        padding: 0px !important;
+    }
+
+    .col-md-2.image {
+        display:none;
+    }
+    .listImage {
+        min-width: 80px;
+        width: 100px;
+    }
+    
 }
 
 
-@media only screen and (max-width: 500px) {
-	.imageDiv {
-		width:30%;
-	}
-	.innerDiv {
-		width:60%;
-	}
-	.innerDivUser {
-		width: 50%;
-	}
-
-	.inputTime {
-		margin-bottom:5px;
-	}
-}
-@media only screen and (max-width: 360px) {
-	.innerDiv span {
-		font-size:14px;
-	}
-	.innerDivUser span {
-    font-size: 16px;
-}
-}
 
 
