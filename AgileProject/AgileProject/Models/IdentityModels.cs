@@ -31,5 +31,7 @@ namespace AgileProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<AgileProject.Models.Corridor> Corridors { get; set; }
     }
 }

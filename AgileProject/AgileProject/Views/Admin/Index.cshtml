@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+
+<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+
+@foreach (var teacher in ViewBag.teachers)
+{
+    <li>
+        <ul>@teacher.FirstName @teacher.LastName</ul>
+    </li>
+}

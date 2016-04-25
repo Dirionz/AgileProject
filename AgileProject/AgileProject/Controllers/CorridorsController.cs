@@ -10,112 +10,107 @@ using AgileProject.Models;
 
 namespace AgileProject.Controllers
 {
-    public class TeachersController : Controller
+    public class CorridorsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Teachers
+        // GET: Corridors
         public ActionResult Index()
         {
-            return View(db.Teacher.ToList());
+            return View(db.Corridors.ToList());
         }
 
-        // GET: Teachers/Details/5
+        // GET: Corridors/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
-            if (teacher == null)
+            Corridor corridor = db.Corridors.Find(id);
+            if (corridor == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+            return View(corridor);
         }
 
-        // GET: Teachers/Create
+        // GET: Corridors/Create
         public ActionResult Create()
         {
-
             return View();
         }
 
-        // POST: Teachers/Create
+        // POST: Corridors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken] //[Bind(Include = "Id,FirstName,LastName,Phone,isAdmin,Corridor")] Teacher teacher
-        public ActionResult Create(RegisterTeacherModel teachermodel)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Name")] Corridor corridor)
         {
-            var teacher = new Teacher();
             if (ModelState.IsValid)
             {
-                var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-                teacher.User = user;
-
-                db.Teacher.Add(teacher);
+                db.Corridors.Add(corridor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(teacher);
+            return View(corridor);
         }
 
-        // GET: Teachers/Edit/5
+        // GET: Corridors/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
-            if (teacher == null)
+            Corridor corridor = db.Corridors.Find(id);
+            if (corridor == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+            return View(corridor);
         }
 
-        // POST: Teachers/Edit/5
+        // POST: Corridors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "Id,Name")] Corridor corridor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(teacher).State = EntityState.Modified;
+                db.Entry(corridor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(teacher);
+            return View(corridor);
         }
 
-        // GET: Teachers/Delete/5
+        // GET: Corridors/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
-            if (teacher == null)
+            Corridor corridor = db.Corridors.Find(id);
+            if (corridor == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+            return View(corridor);
         }
 
-        // POST: Teachers/Delete/5
+        // POST: Corridors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Teacher teacher = db.Teacher.Find(id);
-            db.Teacher.Remove(teacher);
+            Corridor corridor = db.Corridors.Find(id);
+            db.Corridors.Remove(corridor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

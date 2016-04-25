@@ -168,17 +168,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CorridorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TeachersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\IsAdminHelper.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Corridor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterTeacherModel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,6 +243,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Corridors\Create.cshtml" />
+    <Content Include="Views\Corridors\Delete.cshtml" />
+    <Content Include="Views\Corridors\Details.cshtml" />
+    <Content Include="Views\Corridors\Edit.cshtml" />
+    <Content Include="Views\Corridors\Index.cshtml" />
     <Content Include="Views\Teachers\Create.cshtml" />
     <Content Include="Views\Teachers\Delete.cshtml" />
     <Content Include="Views\Teachers\Details.cshtml" />
