@@ -1,4 +1,4 @@
-﻿@model List<AgileProject.Models.Teacher>
+﻿@model AgileProject.Models.PostStatusModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -18,7 +18,7 @@
             </div>
             <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
                 <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
-                <div class="btn-group ddStatus">
+                @*<div class="btn-group ddStatus">
                     <a class="btn btn-primary btn-status dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
                     <ul class="dropdown-menu" id="select">
                         <li><a href="#">Available</a></li>
@@ -26,38 +26,35 @@
                         <li><a href="#">Busy (Students)</a></li>
                         <li><a href="#">Away</a></li>
                     </ul>
+                </div>*@
+
+                @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="">
+                            @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { onchange = "this.form.submit();" })
+                        </div>
+                    </div>
                 </div>
+                
+                }
+
+
+
                 <br>
                 <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
             </div>
         </div>
 
-        @*<div class="col-md-12 col-lg-12 userInfo">
-            <div class="imageDiv">
-                <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
-            </div>
-            <div class="innerDivUser">
-                <span>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</span>
-                <br />
-                <div class="btn-group ddStatus">
-                    <a class="btn btn-primary btn-status dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="select">
-                        <li><a href="#">Available</a></li>
-                        <li><a href="#">Busy</a></li>
-                        <li><a href="#">Busy (Students)</a></li>
-                        <li><a href="#">Away</a></li>
-                    </ul>
-                </div>
-                <br>
-                <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
-            </div>
-        </div>*@
-
     }
 
 
 
-    @foreach (AgileProject.Models.Teacher teacher in Model)
+    @foreach (AgileProject.Models.Teacher teacher in ViewBag.teacherList)
     {
         <div class="row listItem busy-border">
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image">

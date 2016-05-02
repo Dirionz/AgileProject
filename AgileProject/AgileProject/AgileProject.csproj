@@ -182,6 +182,7 @@
     <Compile Include="Models\Corridor.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PostStatusModel.cs" />
     <Compile Include="Models\RegisterTeacherModel.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Teacher.cs" />

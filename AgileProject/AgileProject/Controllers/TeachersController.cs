@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileProject.Models;
+using AgileProject.Helpers;
 
 namespace AgileProject.Controllers
 {
@@ -17,6 +18,10 @@ namespace AgileProject.Controllers
         // GET: Teachers
         public ActionResult Index()
         {
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // TODO: Only view our own "teacher"
             return View(db.Teacher.ToList());
         }
@@ -63,7 +68,7 @@ namespace AgileProject.Controllers
                     FirstName = teachermodel.FirstName,
                     LastName = teachermodel.LastName,
                     Phone = teachermodel.Phone,
-                    isAdmin = teachermodel.isAdmin,
+                    isAdmin = false,
                     Corridor = corridor,
                     User = user
                 });
@@ -77,6 +82,9 @@ namespace AgileProject.Controllers
         // GET: Teachers/Edit/5
         public ActionResult Edit(int? id)
         {
+            if(!IsAdminHelper.isAdminBackend(User.Identity.Name)) {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -108,6 +116,10 @@ namespace AgileProject.Controllers
         // GET: Teachers/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
