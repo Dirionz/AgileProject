@@ -30,6 +30,9 @@ textarea {
 .columnTitle {
 	margin-left:150px;
 }
+.nopadding{
+    padding-left:0px;
+}
 
 .userInfo {
     height:200px;
@@ -59,6 +62,9 @@ textarea {
 }
 .busy-border{
     border-left: 16px solid rgba(255, 0, 0, 0.56);
+}
+.away-border{
+    border-left: 16px solid rgba(255, 247, 0, 0.56);
 }
 
 .listImage {
