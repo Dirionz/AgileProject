@@ -16,6 +16,9 @@ namespace AgileProject.Controllers
         {
             
             var teacherList = db.Teacher.ToList();
+            var statusList = db.Status.ToList();
+            ViewBag.statusList = statusList;
+
             if (User.Identity.Name != "")
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
@@ -37,20 +40,24 @@ namespace AgileProject.Controllers
                 if(status != null)
                 {
                     model.statusId = status.StatusId;
+                    
                 }
                 return View(model);
             }
 
+            
+            ViewBag.teacherList = teacherList;
 
             return View();
         }
 
+
         private IEnumerable<SelectListItem> getStatuses()
         {
             var list = new List<SelectListItem>();
-            list.Add(new SelectListItem { Text = "Avilable", Value = "10"});
+            list.Add(new SelectListItem { Text = "Available", Value = "10"});
             list.Add(new SelectListItem { Text = "Busy", Value = "20" });
-            list.Add(new SelectListItem { Text = "Busy(Students)", Value = "30" });
+            list.Add(new SelectListItem { Text = "Busy (Students)", Value = "30" });
             list.Add(new SelectListItem { Text = "Away", Value = "40" });
 
             return list;
@@ -78,7 +85,6 @@ namespace AgileProject.Controllers
                 status.Date = DateTime.Now;
             }
             db.SaveChanges();
-
             return RedirectToAction("Index", "Home");
         }
 

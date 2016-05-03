@@ -30,21 +30,17 @@
 
                 @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
                 {
-                @Html.AntiForgeryToken()
+                    @Html.AntiForgeryToken()
 
 
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <div class="">
-                            @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { onchange = "this.form.submit();" })
+                    <div class="form-group">
+                        <div class="col-md-10 nopadding">
+                            <div class="">
+                                @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { @class= "btn btn-primary btn-status dropdown-toggle setcolours", @onchange = "this.form.submit();" })
+                            </div>
                         </div>
                     </div>
-                </div>
-                
                 }
-
-
-
                 <br>
                 <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
             </div>
@@ -54,50 +50,63 @@
 
 
 
-    @foreach (AgileProject.Models.Teacher teacher in ViewBag.teacherList)
+    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
     {
-        <div class="row listItem busy-border">
+        if (status.StatusId == 10)
+        {
+            @Html.Raw("<div class='row listItem available-border'>")
+
+        }
+        else if (status.StatusId == 20 || status.StatusId == 30)
+        {
+            @Html.Raw("<div class='row listItem busy-border'>")
+
+        }
+        else
+        {
+            @Html.Raw("<div class='row listItem away-border'>")
+
+        }
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image">
                 <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
             </div>
             <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 v-align textinfo">
-                <h11>@teacher.FirstName @teacher.LastName</h11>
-                <h12>Busy</h12>
-                <h12><b>2016/04/22 13:00</b></h12>
+                <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
+                <h12>@status.StatusId</h12>
+                <h12><b>@status.Date</b></h12>
             </div>
             <div class="calldiv" style="height:100%;">
-                <button type="button" class="btn btn-primary disabled v-align">Call</button>
+                @if (status.StatusId == 10)
+                {
+                    <button type="button" class="btn btn-primary v-align">Call</button>
+                }
             </div>
-        </div>
+        @Html.Raw("</div>");
     }
    
 <script>
 
     $(document).ready(function () {
 
-        $(".dropdown-menu li a").click(function () {
-            var selText = $(this).text();
-            $(this).parents('.btn-group').find('.dropdown-toggle').html(selText + ' <span class="caret"></span>');
-            console.log(selText);
-;            if (selText == 'Available') {
-                $('.btn-status').css('background-color', 'rgba(81,202,66,1)');
-                $('.btn-status').css('border-color', 'rgb(53, 189, 80)');
+            var selText = $(".setcolours option:selected").val();
+            console.log("Status: "+selText);
+;            if (selText == 10) {
+                $('.setcolours').css('background-color', 'rgba(81,202,66,1)');
+                $('.setcolours').css('border-color', 'rgb(53, 189, 80)');
+                $('.inputTime').css('visibility', 'collapse');
             }
-            else if (selText == 'Busy') {
+            else if (selText == 20 || selText == 30) {
                 $('.btn-status').css('background-color', 'rgb(189, 53, 53)');
                 $('.btn-status').css('border-color', 'rgb(202, 66, 66)');
+                $('.inputTime').css('visibility', 'visible');
             }
-            else if (selText == 'Busy (Students)') {
-                $('.btn-status').css('background-color', 'rgb(202, 116, 66)');
-                $('.btn-status').css('border-color', 'rgb(189, 100, 53)');
-            }
-            else if (selText == 'Away') {
+            else if (selText == 40) {
                
                 $('.btn-status').css('background-color', 'rgb(202, 201, 66)');
                 $('.btn-status').css('border-color', 'rgb(202, 170, 66)');
+                $('.inputTime').css('visibility', 'visible');
             }
         });
-    });
 
 </script>
 
