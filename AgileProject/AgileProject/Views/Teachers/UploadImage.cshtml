@@ -1,0 +1,20 @@
+﻿@model AgileProject.Models.Teacher
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("UploadImage", "Teachers", FormMethod.Post,
+                                        new { enctype = "multipart/form-data" }))
+{
+    <label for="file">Upload Image:</label>
+    <input type="file" name="file" id="file" style="width: 100%;" />
+    <input type="submit" value="Upload" class="submit" />
+}
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -14,6 +14,7 @@ namespace AgileProject.Models
         public Corridor Corridor { get; set; }
         public ApplicationUser User { get; set; }
         public bool isAdmin { get; set; }
+        public string imageURL { get; set; }
 
     }
 }

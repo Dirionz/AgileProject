@@ -14,7 +14,8 @@
     {
         <div class="row userInfo">
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image">
-                <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
+                @Html.Raw("<img src=")@ViewBag.teacher.imageURL
+                @Html.Raw("class='img responsive img rounded listImage'/>")
             </div>
             <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
                 <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
@@ -57,7 +58,7 @@
 
 
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image">
-                <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
+                <img src="@status.Teacher.imageURL" class="img-responsive img-rounded listImage" />
             </div>
             <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 v-align textinfo">
                 <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>

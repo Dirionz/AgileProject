@@ -256,6 +256,7 @@
     <Content Include="Views\Teachers\Editall.cshtml" />
     <Content Include="Views\Teachers\Index.cshtml" />
     <Content Include="Views\Teachers\Edit.cshtml" />
+    <Content Include="Views\Teachers\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
