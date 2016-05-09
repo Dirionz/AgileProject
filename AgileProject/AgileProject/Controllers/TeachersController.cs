@@ -58,7 +58,7 @@ namespace AgileProject.Controllers
         [ValidateAntiForgeryToken] //[Bind(Include = "Id,FirstName,LastName,Phone,isAdmin,Corridor")] Teacher teacher
         public ActionResult Create(RegisterTeacherModel teachermodel)
         {
-            if (ModelState.IsValid && db.Teacher.Where(t => t.User.UserName == User.Identity.Name).ToList().Count > 0)
+            if (ModelState.IsValid && db.Teacher.Where(t => t.User.UserName == User.Identity.Name).ToList().Count == 0)
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var corridor = db.Corridors.FirstOrDefault(c => c.Id == teachermodel.corridorId);
@@ -80,7 +80,7 @@ namespace AgileProject.Controllers
         }
 
         // GET: Teachers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Editall(int? id)
         {
             if(!IsAdminHelper.isAdminBackend(User.Identity.Name)) {
                 return RedirectToAction("Index", "Home");
@@ -97,12 +97,41 @@ namespace AgileProject.Controllers
             return View(teacher);
         }
 
-        // POST: Teachers/Edit/5
+
+        // GET: Teachers/Edit
+        public ActionResult Edit()
+        {
+
+            Teacher teacher = db.Teacher.FirstOrDefault(t => t.User.UserName == User.Identity.Name);
+            if (teacher == null)
+            {
+                return HttpNotFound();
+            }
+            return View(teacher);
+        }
+
+        // POST: Teachers/Edit
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone")] Teacher teacher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(teacher).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index","Manage");
+            }
+            return View(teacher);
+        }
+
+        // POST: Teachers/Editall/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editall([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {

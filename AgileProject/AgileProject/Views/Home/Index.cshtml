@@ -52,27 +52,39 @@
 
     @foreach (AgileProject.Models.Status status in ViewBag.statusList)
     {
-        if (status.StatusId == 10)
-        {
-            @Html.Raw("<div class='row listItem available-border'>")
 
-        }
-        else if (status.StatusId == 20 || status.StatusId == 30)
-        {
-            @Html.Raw("<div class='row listItem busy-border'>")
+          <div class="row listItem available-border status-@status.StatusId">
 
-        }
-        else
-        {
-            @Html.Raw("<div class='row listItem away-border'>")
 
-        }
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image">
                 <img src="http://blogdailyherald.com/wp-content/uploads/2014/10/wallpaper-for-facebook-profile-photo.jpg" class="img-responsive img-rounded listImage" />
             </div>
             <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 v-align textinfo">
                 <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
-                <h12>@status.StatusId</h12>
+                <h12>@if (@status.StatusId == 10) { 
+                    @Html.Raw("Available")
+                }
+                    else if (@status.StatusId == 20)
+                    {
+                        @Html.Raw("Busy")
+                }
+                else if (@status.StatusId == 30)
+                {
+                        @Html.Raw("Busy")
+                    if (ViewBag.LoggedInUser != null)
+                    {
+                        @Html.Raw("-Students")
+
+                    }
+                }
+                else if (@status.StatusId == 40)
+                {
+                    @Html.Raw("Away")
+                }
+
+
+
+                </h12>
                 <h12><b>@status.Date</b></h12>
             </div>
             <div class="calldiv" style="height:100%;">
@@ -81,7 +93,8 @@
                     <button type="button" class="btn btn-primary v-align">Call</button>
                 }
             </div>
-        @Html.Raw("</div>");
+         </div>
+
     }
    
 <script>
