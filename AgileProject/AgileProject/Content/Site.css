@@ -57,13 +57,16 @@ textarea {
     border-radius: 5px;
 	margin-top:10px;
 }
-.available-border{
+.status-10{
     border-left: 16px solid rgba(70, 255, 0, 0.56);
 }
-.busy-border{
+.status-20{
     border-left: 16px solid rgba(255, 0, 0, 0.56);
 }
-.away-border{
+.status-30{
+    border-left: 16px solid rgba(255, 0, 0, 0.56);
+}
+.status-40{
     border-left: 16px solid rgba(255, 247, 0, 0.56);
 }
 

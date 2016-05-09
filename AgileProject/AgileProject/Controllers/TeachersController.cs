@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AgileProject.Models;
 using AgileProject.Helpers;
+using System.IO;
 
 namespace AgileProject.Controllers
 {
@@ -70,7 +71,8 @@ namespace AgileProject.Controllers
                     Phone = teachermodel.Phone,
                     isAdmin = false,
                     Corridor = corridor,
-                    User = user
+                    User = user,
+                    imageURL ="../images/defaul.jpg"
                 });
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,7 +82,7 @@ namespace AgileProject.Controllers
         }
 
         // GET: Teachers/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Editall(int? id)
         {
             if(!IsAdminHelper.isAdminBackend(User.Identity.Name)) {
                 return RedirectToAction("Index", "Home");
@@ -97,12 +99,41 @@ namespace AgileProject.Controllers
             return View(teacher);
         }
 
-        // POST: Teachers/Edit/5
+
+        // GET: Teachers/Edit
+        public ActionResult Edit()
+        {
+
+            Teacher teacher = db.Teacher.FirstOrDefault(t => t.User.UserName == User.Identity.Name);
+            if (teacher == null)
+            {
+                return HttpNotFound();
+            }
+            return View(teacher);
+        }
+
+        // POST: Teachers/Edit
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone")] Teacher teacher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(teacher).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index","Manage");
+            }
+            return View(teacher);
+        }
+
+        // POST: Teachers/Editall/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Editall([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -151,5 +182,60 @@ namespace AgileProject.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Teachers/Edit/5
+        public ActionResult UploadImage()
+        {
+
+            Teacher teacher = db.Teacher.FirstOrDefault(t => t.User.UserName == User.Identity.Name);
+            if (teacher == null)
+            {
+                return HttpNotFound();
+            }
+            return View(teacher);
+        }
+        // POST: Teachers/ImageUpload
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                string[] fileArray = file.FileName.Split('.');
+                string fileName = User.Identity.Name+"."+fileArray[1];
+                string pic = System.IO.Path.GetFileName(fileName);
+                string path = System.IO.Path.Combine(
+                                       Server.MapPath("~/images"), pic);
+                // file is uploaded
+                file.SaveAs(path);
+
+                // save the image path path to the database or you can send image 
+                // directly to database
+                // in-case if you want to store byte[] ie. for DB
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                }
+
+                var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
+
+                teacher.imageURL = "./images/"+pic;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+
+            }
+
+
+
+            // after successfully uploading redirect the user
+            return RedirectToAction("Index", "Manage");
+        }           
+       
+
+
     }
 }
