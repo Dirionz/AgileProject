@@ -58,7 +58,7 @@ namespace AgileProject.Controllers
         [ValidateAntiForgeryToken] //[Bind(Include = "Id,FirstName,LastName,Phone,isAdmin,Corridor")] Teacher teacher
         public ActionResult Create(RegisterTeacherModel teachermodel)
         {
-            if (ModelState.IsValid && db.Teacher.Where(t => t.User.UserName == User.Identity.Name).ToList().Count > 0)
+            if (ModelState.IsValid && db.Teacher.Where(t => t.User.UserName == User.Identity.Name).ToList().Count == 0)
             {
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var corridor = db.Corridors.FirstOrDefault(c => c.Id == teachermodel.corridorId);
