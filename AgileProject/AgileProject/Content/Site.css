@@ -107,6 +107,14 @@ h11 {
 
 .col-md-2.image {
     width: 155px;
+    height: 90px;
+    margin-left: 10px;
+
+    -ms-background-position-x: center;
+    -ms-background-position-y: bottom;
+    background-position: center bottom;
+
+    background-size: cover;
 }
 
 .available{

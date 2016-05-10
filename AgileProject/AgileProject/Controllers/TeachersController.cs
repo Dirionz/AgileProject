@@ -72,9 +72,10 @@ namespace AgileProject.Controllers
                     isAdmin = false,
                     Corridor = corridor,
                     User = user,
-                    imageURL ="../images/defaul.jpg"
+                    imageURL ="../images/default.jpg"
                 });
                 db.SaveChanges();
+                SetStatus();
                 return RedirectToAction("Index");
             }
             
@@ -222,7 +223,7 @@ namespace AgileProject.Controllers
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
 
-                teacher.imageURL = "./images/"+pic;
+                teacher.imageURL = "../images/"+pic;
                 db.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -233,8 +234,28 @@ namespace AgileProject.Controllers
 
             // after successfully uploading redirect the user
             return RedirectToAction("Index", "Manage");
-        }           
-       
+        }
+
+        //After creating a teacher  -> sets it's status to available
+        [HttpPost]
+        public ActionResult SetStatus()
+        {
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
+            var status = db.Status.FirstOrDefault(s => s.Teacher.Id == teacher.Id);
+
+                status = new Status()
+                {
+                    StatusId = 10,
+                    Teacher = teacher,
+                    Date = DateTime.Now
+                };
+                db.Status.Add(status);
+            
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
 
 
     }
