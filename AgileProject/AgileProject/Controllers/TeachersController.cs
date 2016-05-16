@@ -45,7 +45,7 @@ namespace AgileProject.Controllers
         public ActionResult Create()
         {
             var username = User.Identity.Name;
-            if(userExists(username))
+            if(teacherExists(username))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -57,9 +57,9 @@ namespace AgileProject.Controllers
             return View(model);
         }
 
-        private bool userExists(string username)
+        private bool teacherExists(string username)
         {
-            return (db.Users.Where(u => u.UserName == username).ToList().Count > 0);
+            return (db.Teacher.Where(u => u.User.UserName == username).ToList().Count > 0);
         }
 
         // POST: Teachers/Create
