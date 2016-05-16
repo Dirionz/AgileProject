@@ -23,7 +23,6 @@ namespace AgileProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            // TODO: Only view our own "teacher"
             return View(db.Teacher.ToList());
         }
 

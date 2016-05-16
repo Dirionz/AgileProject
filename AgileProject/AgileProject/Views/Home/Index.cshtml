@@ -81,7 +81,10 @@
 
 
                 </h12>
-                <h12><b>@status.Date</b></h12>
+                @if (status.Date != null)
+                {
+                    <h12><b>@status.Date</b></h12>
+                }
             </div>
             <div class="calldiv" style="height:100%;">
                 @if (status.StatusId == 10)
