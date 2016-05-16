@@ -6,7 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using AgileProject.Helpers;
 using AgileProject.Models;
+
 
 namespace AgileProject.Controllers
 {
@@ -17,12 +19,24 @@ namespace AgileProject.Controllers
         // GET: Corridors
         public ActionResult Index()
         {
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View(db.Corridors.ToList());
         }
+
 
         // GET: Corridors/Details/5
         public ActionResult Details(int? id)
         {
+
+            //Checking if user is an admin
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +52,12 @@ namespace AgileProject.Controllers
         // GET: Corridors/Create
         public ActionResult Create()
         {
+            //Checking if user is an admin
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -61,6 +81,12 @@ namespace AgileProject.Controllers
         // GET: Corridors/Edit/5
         public ActionResult Edit(int? id)
         {
+            //Checking if user is an admin
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,6 +118,12 @@ namespace AgileProject.Controllers
         // GET: Corridors/Delete/5
         public ActionResult Delete(int? id)
         {
+
+            //Checking if user is an admin
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
