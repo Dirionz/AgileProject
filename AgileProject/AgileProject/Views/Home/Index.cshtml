@@ -55,7 +55,7 @@
           <div class="row listItem available-border status-@status.StatusId">
 
             <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image img responsive img-rounded listImage" style="background-image: url(@status.Teacher.imageURL)"></div>
-            <div class="col-xs-6 col-sm-7 col-md-8 col-lg-9 v-align textinfo">
+            <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6 v-align textinfo">
                 <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
                 <h12>@if (@status.StatusId == 10) { 
                     @Html.Raw("Available")
@@ -86,15 +86,70 @@
                     <h12><b>@status.Date</b></h12>
                 }
             </div>
-            <div class="calldiv" style="height:100%;">
-                @if (status.StatusId == 10)
-                {
-                    <button type="button" class="btn btn-primary v-align">Call</button>
-                }
-            </div>
-         </div>
+              <div class="col-xs-4 col-sm-3 col-md-4 col-lg-4 v-align textinfo">
+                  <h12 class="right"><b>B+3231</b></h12>
+                  <h12 class="right">peter.larsson@ju.se</h12>
+                  <h12 class="right">+46 0123 254684</h12>
+              </div>
+
+        </div>
 
     }
+<br><br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="row">
+    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
+    {
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-1 image img responsive img-rounded testItem">
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage testImage testStatus-@status.StatusId" style="background-image: url(@status.Teacher.imageURL)"></div>
+                <div class="col-xs-9 col-sm-9 col-md-7 col-lg-8 testText">
+                    <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
+                    <h12>
+                        @if (@status.StatusId == 10)
+                    {
+                        @Html.Raw("Available")
+                    }
+                    else if (@status.StatusId == 20)
+                    {
+                        @Html.Raw("Busy")
+                    }
+                    else if (@status.StatusId == 30)
+                    {
+                        @Html.Raw("Busy")
+                        if (ViewBag.LoggedInUser != null)
+                        {
+                            @Html.Raw("-Students")
+
+                        }
+                    }
+                    else if (@status.StatusId == 40)
+                    {
+                        @Html.Raw("Away")
+                    }
+
+                    @if (status.Date != null)
+                    {
+                        <h12><b>@status.Date</b></h12>
+                    }
+                    <h12 class="right"><b>B3231</b></h12>
+                    <h12 class="right">peter.larsson@ju.se</h12>
+                    <h12 class="right">+46 0123 254684</h12>
+</div>
+            </div>
+
+        </div>
+
+
+    }
+</div>
+
    
 <script>
 

@@ -69,6 +69,9 @@ textarea {
 .status-40{
     border-left: 16px solid rgba(255, 247, 0, 0.56);
 }
+.right{
+    text-align:right;
+}
 
 .listImage {
     min-width: 140px;
@@ -116,7 +119,43 @@ h11 {
 
     background-size: cover;
 }
+.testItem{
+    margin:10px;
+    background-color: #FAFAFA;
+        border-radius: 95px;
 
+    /*border-top-left-radius: 95px;
+    border-bottom-left-radius:95px;*/
+    border: 2px rgba(242, 242, 242, 0.61) solid;
+}
+.testImage{
+    border-radius: 95px;
+    height: 150px;
+}
+.testStatus-10{
+    border: 5px solid rgba(70, 255, 0, 0.56);
+}
+.testStatus-20{
+    border: 5px solid rgba(255, 0, 0, 0.56);
+}
+.testStatus-20{
+    border: 5px solid rgba(255, 0, 0, 0.56);
+}
+.testStatus-40{
+    border: 5px solid rgba(255, 247, 0, 0.56);
+}
+.testText{
+    height: 150px;
+    padding: 20px;
+}
+
+.itemImage{
+    height: 170px;
+    width: 170px;
+    background-position: center bottom;
+    background-size: cover;
+    background-image: url(../images/default.jpg);
+}
 .available{
     background-color: rgba(81,202,66,1);
 }
