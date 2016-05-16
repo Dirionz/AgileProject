@@ -122,7 +122,10 @@ namespace AgileProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(teacher).State = EntityState.Modified;
+                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teacher.Id);
+                teacherdb.FirstName = teacher.FirstName;
+                teacherdb.LastName = teacher.LastName;
+                teacherdb.Phone = teacher.Phone;
                 db.SaveChanges();
                 return RedirectToAction("Index","Manage");
             }
@@ -138,7 +141,10 @@ namespace AgileProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(teacher).State = EntityState.Modified;
+                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teacher.Id);
+                teacherdb.FirstName = teacher.FirstName;
+                teacherdb.LastName = teacher.LastName;
+                teacherdb.Phone = teacher.Phone;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
