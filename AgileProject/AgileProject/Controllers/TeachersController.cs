@@ -186,6 +186,8 @@ namespace AgileProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Teacher teacher = db.Teacher.Find(id);
+            var status = db.Status.FirstOrDefault(s => s.Teacher.Id == teacher.Id);
+            db.Status.Remove(status);
             db.Teacher.Remove(teacher);
             db.SaveChanges();
             return RedirectToAction("Index");
