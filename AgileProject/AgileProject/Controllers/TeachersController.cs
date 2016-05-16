@@ -23,7 +23,6 @@ namespace AgileProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            // TODO: Only view our own "teacher"
             return View(db.Teacher.ToList());
         }
 
@@ -44,12 +43,23 @@ namespace AgileProject.Controllers
 
         // GET: Teachers/Create
         public ActionResult Create()
-        {  
+        {
+            var username = User.Identity.Name;
+            if(userExists(username))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var model = new RegisterTeacherModel
             {
                 getCorridors = new SelectList(db.Corridors, "Id", "Name")
             };
             return View(model);
+        }
+
+        private bool userExists(string username)
+        {
+            return (db.Users.Where(u => u.UserName == username).ToList().Count > 0);
         }
 
         // POST: Teachers/Create
