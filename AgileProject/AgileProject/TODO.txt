@@ -4,8 +4,12 @@ Set the time
 
 Cant create a teacher because the corridor bug (tvek)
 
-Delete corridor/teacher fix the contraints
+Delete corridor fix the contraints
 
-Sortera statuslistan på namn
+Sortera statuslistan på efternamn
 
 Sortera på korridor
+
+Komma på namn på appen
+
+Remove call button and set info

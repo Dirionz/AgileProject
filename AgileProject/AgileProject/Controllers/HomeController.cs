@@ -16,7 +16,7 @@ namespace AgileProject.Controllers
         {
             
             var teacherList = db.Teacher.ToList();
-            var statusList = db.Status.ToList();
+            var statusList = db.Status.OrderBy(s => s.Teacher.LastName).ToList();
             ViewBag.statusList = statusList;
 
             if (User.Identity.Name != "")
