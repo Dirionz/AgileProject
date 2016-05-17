@@ -12,11 +12,16 @@ namespace AgileProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        public ActionResult Index()
+
+        public ActionResult Index(string id)
         {
             
-            var teacherList = db.Teacher.ToList();
+            var teacherList = db.Teacher.Include("Corridor").ToList();
             var statusList = db.Status.OrderBy(s => s.Teacher.LastName).ThenBy(st => st.Teacher.FirstName).ToList();
+            if (id != null)
+            {
+                statusList = statusList.Where(l => l.Teacher.Corridor.Name == id).ToList();
+            }
             ViewBag.statusList = statusList;
 
             if (User.Identity.Name != "")
@@ -24,7 +29,7 @@ namespace AgileProject.Controllers
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
                 ViewBag.LoggedInUser = (user != null);
-                if(teacher == null)
+                if (teacher == null)
                 {
                     return RedirectToAction("Create", "Teachers");
                 }
@@ -37,15 +42,15 @@ namespace AgileProject.Controllers
                     getStatus = new SelectList(getStatuses(), "Value", "Text")
                 };
                 var status = db.Status.FirstOrDefault(s => s.Teacher.Id == teacher.Id);
-                if(status != null)
+                if (status != null)
                 {
                     model.statusId = status.StatusId;
-                    
+
                 }
                 return View(model);
             }
 
-            
+
             ViewBag.teacherList = teacherList;
 
             return View();
