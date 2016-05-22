@@ -129,6 +129,7 @@ namespace AgileProject.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Corridor corridor = db.Corridors.Find(id);
+
             if (corridor == null)
             {
                 return HttpNotFound();
@@ -142,6 +143,13 @@ namespace AgileProject.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Corridor corridor = db.Corridors.Find(id);
+            List<Teacher> teacherList = db.Teacher.Where(i => i.Corridor.Id == corridor.Id).ToList();
+
+            foreach (Teacher t in teacherList)
+            {
+                t.Corridor = null;
+            }
+
             db.Corridors.Remove(corridor);
             db.SaveChanges();
             return RedirectToAction("Index");
