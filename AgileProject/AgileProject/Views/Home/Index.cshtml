@@ -102,6 +102,43 @@
 <br>
 <br>
 
+@if (ViewBag.LoggedInUser != null)
+{
+    <div class="row userInfo">
+        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage testImage testStatus-" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
+
+        <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
+            <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
+            @*<div class="btn-group ddStatus">
+                    <a class="btn btn-primary btn-status dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
+                    <ul class="dropdown-menu" id="select">
+                        <li><a href="#">Available</a></li>
+                        <li><a href="#">Busy</a></li>
+                        <li><a href="#">Busy (Students)</a></li>
+                        <li><a href="#">Away</a></li>
+                    </ul>
+                </div>*@
+
+            @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+
+
+                <div class="form-group">
+                    <div class="col-md-10 nopadding">
+                        <div class="">
+                            @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { @class = "btn btn-primary btn-status dropdown-toggle setcolours", @onchange = "this.form.submit();" })
+                        </div>
+                    </div>
+                </div>
+            }
+            <br>
+            <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
+        </div>
+    </div>
+
+}
+
 <div class="row">
     @foreach (AgileProject.Models.Status status in ViewBag.statusList)
     {
@@ -140,10 +177,10 @@
                     }
                     @if (status.StatusId == 10)
                     {
-                        <h12 class="right"><b>B3231</b></h12>
+                        <h12 class="right"><b>@status.Teacher.PadNumber</b></h12>
                     }
-                    <h12 class="right">peter.larsson@ju.se</h12>
-                    <h12 class="right">+46 0123 254684</h12>
+                    <h12 class="right">@status.Teacher.Email</h12>
+                    <h12 class="right">@status.Teacher.Phone</h12>
 </div>
             </div>
 

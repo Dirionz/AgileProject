@@ -80,6 +80,8 @@ namespace AgileProject.Controllers
                     LastName = teachermodel.LastName,
                     Phone = teachermodel.Phone,
                     isAdmin = false,
+                    PadNumber = teachermodel.PadNumber,
+                    Email = teachermodel.Email,
                     Corridor = corridor,
                     User = user,
                     imageURL ="../images/default.jpg"
@@ -128,7 +130,7 @@ namespace AgileProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone")] Teacher teacher)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,PadNumber,Email")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -136,6 +138,8 @@ namespace AgileProject.Controllers
                 teacherdb.FirstName = teacher.FirstName;
                 teacherdb.LastName = teacher.LastName;
                 teacherdb.Phone = teacher.Phone;
+                teacherdb.Email = teacher.Email;
+                teacherdb.PadNumber = teacher.PadNumber;
                 db.SaveChanges();
                 return RedirectToAction("Index","Manage");
             }
@@ -147,7 +151,7 @@ namespace AgileProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editall([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin")] Teacher teacher)
+        public ActionResult Editall([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin, PadNumber,Email")] Teacher teacher)
         {
             if (ModelState.IsValid)
             {
@@ -155,6 +159,9 @@ namespace AgileProject.Controllers
                 teacherdb.FirstName = teacher.FirstName;
                 teacherdb.LastName = teacher.LastName;
                 teacherdb.Phone = teacher.Phone;
+                teacherdb.Email = teacher.Email;
+                teacherdb.isAdmin = teacher.isAdmin;
+                teacherdb.PadNumber = teacher.PadNumber;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

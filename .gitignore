@@ -239,3 +239,7 @@ AgileProject/AgileProject/Web.config
 AgileProject/AgileProject/images/a@a.a.gif
 AgileProject/AgileProject/Controllers/HomeController.cs
 AgileProject/AgileProject/images/g@g.g.jpg
+AgileProject/AgileProject/images/f@f.f.jpg
+*.svg
+AgileProject/AgileProject/images/g@g.g.png
+AgileProject/AgileProject/Migrations/201605221235460_Email pinNumber.cs

@@ -15,6 +15,8 @@ namespace AgileProject.Models
         public ApplicationUser User { get; set; }
         public bool isAdmin { get; set; }
         public string imageURL { get; set; }
+        public string PadNumber { get; set; }
+        public string Email { get; set; }
 
     }
 }

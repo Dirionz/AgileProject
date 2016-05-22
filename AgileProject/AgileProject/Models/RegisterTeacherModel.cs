@@ -16,5 +16,7 @@ namespace AgileProject.Models
         public int corridorId { get; set; }
         public ApplicationUser User { get; set; }
         public bool isAdmin { get; set; }
+        public string PadNumber { get; set; }
+        public string Email { get; set; }
     }
 }
