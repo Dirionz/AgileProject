@@ -281,7 +281,7 @@ namespace AgileProject.Controllers
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
 
-                teacher.imageURL = "../images/" + pic;
+                teacher.imageURL = "/images/" + pic;
                 db.SaveChanges();
                 return RedirectToAction("Index");
 

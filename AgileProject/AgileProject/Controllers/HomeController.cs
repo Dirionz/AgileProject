@@ -15,12 +15,12 @@ namespace AgileProject.Controllers
 
         public ActionResult Index(string id)
         {
-            
-            var teacherList = db.Teacher.Include("Corridor").ToList();
-            var statusList = db.Status.OrderBy(s => s.Teacher.LastName).ThenBy(st => st.Teacher.FirstName).ToList();
+            var statusList = db.Status.Include("Teacher").OrderBy(s => s.Teacher.LastName).ThenBy(st => st.Teacher.FirstName).ToList();
             if (id != null)
             {
-                statusList = statusList.Where(l => l.Teacher.Corridor.Name == id).ToList();
+                statusList = statusList.Where(status => 
+                                              getTeacherWithCorridor(status.Teacher).Corridor.Name == id 
+                                              ).ToList();
             }
             ViewBag.statusList = statusList;
 
@@ -34,8 +34,6 @@ namespace AgileProject.Controllers
                     return RedirectToAction("Create", "Teachers");
                 }
                 ViewBag.teacher = teacher;
-                teacherList.Remove(teacher);
-                ViewBag.teacherList = teacherList;
 
                 var model = new PostStatusModel
                 {
@@ -51,10 +49,12 @@ namespace AgileProject.Controllers
                 return View(model);
             }
 
-
-            ViewBag.teacherList = teacherList;
-
             return View();
+        }
+
+        private Teacher getTeacherWithCorridor(Teacher teacher)
+        {
+            return db.Teacher.Include("Corridor").FirstOrDefault(t => t.Id == teacher.Id);
         }
 
 
