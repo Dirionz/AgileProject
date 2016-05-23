@@ -3,138 +3,17 @@
     ViewBag.Title = "Home Page";
 }
 
-
-@*<div class="col-md-12 col-lg-12" style="margin-top:15px;">
-	<span class="columnTitle">Name</span>
-	<span>Status</span>
-	<span>Back in</span>
-</div>*@
-
-    @if (ViewBag.LoggedInUser != null)
-    {
-        <div class="row userInfo">
-            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image img responsive img-rounded listImage" style="background-image: url(@ViewBag.teacher.imageURL)">
-            </div>
-            <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
-                <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
-                @*<div class="btn-group ddStatus">
-                    <a class="btn btn-primary btn-status dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="select">
-                        <li><a href="#">Available</a></li>
-                        <li><a href="#">Busy</a></li>
-                        <li><a href="#">Busy (Students)</a></li>
-                        <li><a href="#">Away</a></li>
-                    </ul>
-                </div>*@
-
-                @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-
-
-                    <div class="form-group">
-                        <div class="col-md-10 nopadding">
-                            <div class="">
-                                @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { @class= "btn btn-primary btn-status dropdown-toggle setcolours", @onchange = "this.form.submit();" })
-                            </div>
-                        </div>
-                    </div>
-                }
-                <br>
-                @using (Html.BeginForm("ChangeTime", "Home", FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
-
-
-                    <div class="form-group">
-                        <div class="col-md-10 nopadding">
-                            <div class="">
-                                @Html.TextBoxFor(model => model.date,Model.date, new {@id="min-date",@class = "inputTime", @onchange = "this.form.submit();" })
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-    }
-
-
-
-    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
-    {
-
-          <div class="row listItem available-border status-@status.StatusId">
-
-            <div class="col-xs-3 col-sm-3 col-md-2 col-lg-2 v-align image img responsive img-rounded listImage" style="background-image: url(@status.Teacher.imageURL)"></div>
-            <div class="col-xs-5 col-sm-6 col-md-6 col-lg-6 v-align textinfo">
-                <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
-                <h12>@if (@status.StatusId == 10) { 
-                    @Html.Raw("Available")
-                }
-                    else if (@status.StatusId == 20)
-                    {
-                        @Html.Raw("Busy")
-                }
-                else if (@status.StatusId == 30)
-                {
-                        @Html.Raw("Busy")
-                    if (ViewBag.LoggedInUser != null)
-                    {
-                        @Html.Raw("-Students")
-
-                    }
-                }
-                else if (@status.StatusId == 40)
-                {
-                    @Html.Raw("Away")
-                }
-
-
-
-                </h12>
-                @if (status.Date != null)
-                {
-                    <h12><b>@status.Date</b></h12>
-                }
-            </div>
-              <div class="col-xs-4 col-sm-3 col-md-4 col-lg-4 v-align textinfo">
-                  <h12 class="right"><b>B+3231</b></h12>
-                  <h12 class="right">peter.larsson@ju.se</h12>
-                  <h12 class="right">+46 0123 254684</h12>
-              </div>
-
-        </div>
-
-    }
-<br><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 @if (ViewBag.LoggedInUser != null)
 {
     <div class="row userInfo">
-        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage testImage testStatus-" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
+        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@Model.statusId" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
 
         <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
             <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
-            @*<div class="btn-group ddStatus">
-                    <a class="btn btn-primary btn-status dropdown-toggle" data-toggle="dropdown" href="#">Change status <span class="caret"></span></a>
-                    <ul class="dropdown-menu" id="select">
-                        <li><a href="#">Available</a></li>
-                        <li><a href="#">Busy</a></li>
-                        <li><a href="#">Busy (Students)</a></li>
-                        <li><a href="#">Away</a></li>
-                    </ul>
-                </div>*@
 
             @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
                 {
                 @Html.AntiForgeryToken()
-
 
                 <div class="form-group">
                     <div class="col-md-10 nopadding">
@@ -145,7 +24,19 @@
                 </div>
             }
             <br>
-            <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
+            @using (Html.BeginForm("ChangeTime", "Home", FormMethod.Post))
+                {
+                @Html.AntiForgeryToken()
+
+
+                <div class="form-group">
+                    <div class="col-md-10 nopadding">
+                        <div class="">
+                            @Html.TextBoxFor(model => model.date, Model.date, new { @id = "min-date", @class = "inputTime", @onchange = "this.form.submit();" })
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 
@@ -155,10 +46,10 @@
     @foreach (AgileProject.Models.Status status in ViewBag.statusList)
     {
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-1 image img responsive img-rounded testItem">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-md-offset-1 image img responsive img-rounded testItem">
             <div class="row">
-                <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage testImage testStatus-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
-                <div class="col-xs-9 col-sm-9 col-md-7 col-lg-8 testText">
+                <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
+                <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10 testText">
                     <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
                     <h12>
                         @if (@status.StatusId == 10)
@@ -209,28 +100,11 @@
 
         $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
 
-        //$('#min-date').change(function () {
-        //    var time = $('#min-date').val();
-        //    console.log(time);
-        //    $.ajax({
-        //        url: 'Home/ChangeTime',
-        //        type: 'POST',
-        //        contentType: 'application/json',
-        //        data:{
-        //            timeId: time
-        //        },
-        //        error: function (jqXHR, exception) {
-        //            alert('Error message. Couldnt set time!');
-        //        }
-        //    });
-        //})
-
         var selText = $(".setcolours option:selected").val();
-        console.log("Status: "+selText);
+
 ;            if (selText == 10) {
             $('.setcolours').css('background-color', 'rgba(81,202,66,1)');
             $('.setcolours').css('border-color', 'rgb(53, 189, 80)');
-            $('.inputTime').css('visibility', 'collapse');
         }
         else if (selText == 20 || selText == 30) {
             $('.btn-status').css('background-color', 'rgb(189, 53, 53)');
