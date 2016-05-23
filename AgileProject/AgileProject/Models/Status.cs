@@ -10,6 +10,6 @@ namespace AgileProject.Models
         public int Id { get; set; }
         public int StatusId { get; set; }
         public Teacher Teacher { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

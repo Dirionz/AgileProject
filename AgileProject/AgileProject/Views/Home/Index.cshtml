@@ -41,7 +41,19 @@
                     </div>
                 }
                 <br>
-                <input type="text" id="min-date" class="inputTime" placeholder="2016/04/05 13:00" />
+                @using (Html.BeginForm("ChangeTime", "Home", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <div class="form-group">
+                        <div class="col-md-10 nopadding">
+                            <div class="">
+                                @Html.TextBoxFor(model => model.date,Model.date, new {@id="min-date",@class = "inputTime", @onchange = "this.form.submit();" })
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
 
@@ -195,25 +207,43 @@
 
     $(document).ready(function () {
 
-            var selText = $(".setcolours option:selected").val();
-            console.log("Status: "+selText);
+        $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
+
+        //$('#min-date').change(function () {
+        //    var time = $('#min-date').val();
+        //    console.log(time);
+        //    $.ajax({
+        //        url: 'Home/ChangeTime',
+        //        type: 'POST',
+        //        contentType: 'application/json',
+        //        data:{
+        //            timeId: time
+        //        },
+        //        error: function (jqXHR, exception) {
+        //            alert('Error message. Couldnt set time!');
+        //        }
+        //    });
+        //})
+
+        var selText = $(".setcolours option:selected").val();
+        console.log("Status: "+selText);
 ;            if (selText == 10) {
-                $('.setcolours').css('background-color', 'rgba(81,202,66,1)');
-                $('.setcolours').css('border-color', 'rgb(53, 189, 80)');
-                $('.inputTime').css('visibility', 'collapse');
-            }
-            else if (selText == 20 || selText == 30) {
-                $('.btn-status').css('background-color', 'rgb(189, 53, 53)');
-                $('.btn-status').css('border-color', 'rgb(202, 66, 66)');
-                $('.inputTime').css('visibility', 'visible');
-            }
-            else if (selText == 40) {
+            $('.setcolours').css('background-color', 'rgba(81,202,66,1)');
+            $('.setcolours').css('border-color', 'rgb(53, 189, 80)');
+            $('.inputTime').css('visibility', 'collapse');
+        }
+        else if (selText == 20 || selText == 30) {
+            $('.btn-status').css('background-color', 'rgb(189, 53, 53)');
+            $('.btn-status').css('border-color', 'rgb(202, 66, 66)');
+            $('.inputTime').css('visibility', 'visible');
+        }
+        else if (selText == 40) {
                
-                $('.btn-status').css('background-color', 'rgb(202, 201, 66)');
-                $('.btn-status').css('border-color', 'rgb(202, 170, 66)');
-                $('.inputTime').css('visibility', 'visible');
-            }
-        });
+            $('.btn-status').css('background-color', 'rgb(202, 201, 66)');
+            $('.btn-status').css('border-color', 'rgb(202, 170, 66)');
+            $('.inputTime').css('visibility', 'visible');
+        }
+    });
 
 </script>
 

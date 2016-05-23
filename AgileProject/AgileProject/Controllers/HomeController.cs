@@ -45,6 +45,7 @@ namespace AgileProject.Controllers
                 if (status != null)
                 {
                     model.statusId = status.StatusId;
+                    model.date = status.Date.ToString();
 
                 }
                 return View(model);
@@ -81,15 +82,30 @@ namespace AgileProject.Controllers
                 {
                     StatusId = model.statusId,
                     Teacher = teacher,
-                    Date = DateTime.Now
+                    
                 };
                 db.Status.Add(status);
             } else
             {
                 status.StatusId = model.statusId;
-                status.Date = DateTime.Now;
+                
             }
+            status.Date = null;
             db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ChangeTime(PostStatusModel model)
+        {
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
+
+            var status = db.Status.FirstOrDefault(s => s.Teacher.Id == teacher.Id);
+            DateTime dt = DateTime.ParseExact(model.date, "dd/MM/yyyy HH:mm",System.Globalization.CultureInfo.InvariantCulture);
+
+            status.Date = dt;
+            db.SaveChanges();
+
             return RedirectToAction("Index", "Home");
         }
 
