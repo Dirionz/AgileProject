@@ -45,7 +45,7 @@ namespace AgileProject.Controllers
         public ActionResult Create()
         {
             var username = User.Identity.Name;
-            if(teacherExists(username))
+            if (teacherExists(username))
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -84,32 +84,48 @@ namespace AgileProject.Controllers
                     Email = teachermodel.Email,
                     Corridor = corridor,
                     User = user,
-                    imageURL ="../images/default.jpg"
+                    imageURL = "../images/default.jpg"
                 });
                 db.SaveChanges();
                 SetStatus();
                 return RedirectToAction("Index");
             }
-            
+
             return View(teachermodel);
         }
 
         // GET: Teachers/Edit/5
         public ActionResult Editall(int? id)
         {
-            if(!IsAdminHelper.isAdminBackend(User.Identity.Name)) {
+            if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
+            {
                 return RedirectToAction("Index", "Home");
             }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Teacher teacher = db.Teacher.Find(id);
+            Teacher teacher = db.Teacher.Include("Corridor").FirstOrDefault(t => t.Id == id);
             if (teacher == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+
+            var model = new RegisterTeacherModel()
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Phone = teacher.Phone,
+                corridorId = teacher.Corridor.Id,
+                User = teacher.User,
+                isAdmin = teacher.isAdmin,
+                PadNumber = teacher.PadNumber,
+                Email = teacher.Email,
+                getCorridors = new SelectList(db.Corridors, "Id", "Name", teacher.Corridor.Id.ToString())
+            };
+
+            return View(model);
         }
 
 
@@ -117,12 +133,27 @@ namespace AgileProject.Controllers
         public ActionResult Edit()
         {
 
-            Teacher teacher = db.Teacher.FirstOrDefault(t => t.User.UserName == User.Identity.Name);
+            Teacher teacher = db.Teacher.Include("Corridor").FirstOrDefault(t => t.User.UserName == User.Identity.Name);
             if (teacher == null)
             {
                 return HttpNotFound();
             }
-            return View(teacher);
+
+            var model = new RegisterTeacherModel()
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                Phone = teacher.Phone,
+                corridorId = teacher.Corridor.Id,
+                User = teacher.User,
+                isAdmin = teacher.isAdmin,
+                PadNumber = teacher.PadNumber,
+                Email = teacher.Email,
+                getCorridors = new SelectList(db.Corridors, "Id", "Name", teacher.Corridor.Id.ToString())
+            };
+
+            return View(model);
         }
 
         // POST: Teachers/Edit
@@ -130,20 +161,21 @@ namespace AgileProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Phone,PadNumber,Email")] Teacher teacher)
+        public ActionResult Edit(RegisterTeacherModel teachermodel)
         {
             if (ModelState.IsValid)
             {
-                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teacher.Id);
-                teacherdb.FirstName = teacher.FirstName;
-                teacherdb.LastName = teacher.LastName;
-                teacherdb.Phone = teacher.Phone;
-                teacherdb.Email = teacher.Email;
-                teacherdb.PadNumber = teacher.PadNumber;
+                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teachermodel.Id);
+                teacherdb.FirstName = teachermodel.FirstName;
+                teacherdb.LastName = teachermodel.LastName;
+                teacherdb.Phone = teachermodel.Phone;
+                teacherdb.Email = teachermodel.Email;
+                teacherdb.PadNumber = teachermodel.PadNumber;
+                teacherdb.Corridor = db.Corridors.FirstOrDefault(c => c.Id == teachermodel.corridorId);
                 db.SaveChanges();
-                return RedirectToAction("Index","Manage");
+                return RedirectToAction("Index", "Manage");
             }
-            return View(teacher);
+            return View(teachermodel);
         }
 
         // POST: Teachers/Editall/5
@@ -151,21 +183,22 @@ namespace AgileProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editall([Bind(Include = "Id,FirstName,LastName,Phone,isAdmin, PadNumber,Email")] Teacher teacher)
+        public ActionResult Editall(RegisterTeacherModel teachermodel)
         {
             if (ModelState.IsValid)
             {
-                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teacher.Id);
-                teacherdb.FirstName = teacher.FirstName;
-                teacherdb.LastName = teacher.LastName;
-                teacherdb.Phone = teacher.Phone;
-                teacherdb.Email = teacher.Email;
-                teacherdb.isAdmin = teacher.isAdmin;
-                teacherdb.PadNumber = teacher.PadNumber;
+                var teacherdb = db.Teacher.FirstOrDefault(t => t.Id == teachermodel.Id);
+                teacherdb.FirstName = teachermodel.FirstName;
+                teacherdb.LastName = teachermodel.LastName;
+                teacherdb.Phone = teachermodel.Phone;
+                teacherdb.Email = teachermodel.Email;
+                teacherdb.isAdmin = teachermodel.isAdmin;
+                teacherdb.PadNumber = teachermodel.PadNumber;
+                teacherdb.Corridor = db.Corridors.FirstOrDefault(c => c.Id == teachermodel.corridorId);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(teacher);
+            return View(teachermodel);
         }
 
         // GET: Teachers/Delete/5
@@ -229,7 +262,7 @@ namespace AgileProject.Controllers
             if (file != null)
             {
                 string[] fileArray = file.FileName.Split('.');
-                string fileName = User.Identity.Name+"."+fileArray[1];
+                string fileName = User.Identity.Name + "." + fileArray[1];
                 string pic = System.IO.Path.GetFileName(fileName);
                 string path = System.IO.Path.Combine(
                                        Server.MapPath("~/images"), pic);
@@ -248,7 +281,7 @@ namespace AgileProject.Controllers
                 var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
                 var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
 
-                teacher.imageURL = "../images/"+pic;
+                teacher.imageURL = "../images/" + pic;
                 db.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -269,14 +302,14 @@ namespace AgileProject.Controllers
             var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
             var status = db.Status.FirstOrDefault(s => s.Teacher.Id == teacher.Id);
 
-                status = new Status()
-                {
-                    StatusId = 10,
-                    Teacher = teacher,
-                    Date = DateTime.Now
-                };
-                db.Status.Add(status);
-            
+            status = new Status()
+            {
+                StatusId = 10,
+                Teacher = teacher,
+                Date = DateTime.Now
+            };
+            db.Status.Add(status);
+
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
