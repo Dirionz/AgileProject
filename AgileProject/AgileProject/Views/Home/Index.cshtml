@@ -42,17 +42,15 @@
 
 }
 
-<div class="row">
-    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
-    {
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-md-offset-1 image img responsive img-rounded testItem">
-            <div class="row">
-                <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
-                <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10 testText">
-                    <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
-                    <h12>
-                        @if (@status.StatusId == 10)
+   @foreach (AgileProject.Models.Status status in ViewBag.statusList)
+   {
+    <div class="row listItem">
+        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
+            <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10 v-align">
+                <div class="first">
+                    <p class="text-M">@status.Teacher.FirstName @status.Teacher.LastName</p>
+                    @if (@status.StatusId == 10)
                     {
                         @Html.Raw("Available")
                     }
@@ -78,22 +76,23 @@
                     {
                         <h12><b>@status.Date</b></h12>
                     }
+                </div>
+
+                <div class="second">
                     @if (status.StatusId == 10)
                     {
                         <h12 class="right"><b>@status.Teacher.PadNumber</b></h12>
                     }
                     <h12 class="right">@status.Teacher.Email</h12>
                     <h12 class="right">@status.Teacher.Phone</h12>
-</div>
+                </div>
+
             </div>
-
         </div>
+   }
+       
 
 
-    }
-</div>
-
-   
 <script>
 
     $(document).ready(function () {
