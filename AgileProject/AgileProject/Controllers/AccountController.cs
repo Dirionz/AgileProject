@@ -139,14 +139,13 @@ namespace AgileProject.Controllers
         // GET: /Account/Register
         public ActionResult Register()
         {
-            return View();
-            //var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
-            //var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
-            //if (teacher != null && teacher.isAdmin)
-            //{
-            //    return View();
-            //}
-            //return RedirectToAction("Index", "Home");
+            var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+            var teacher = db.Teacher.FirstOrDefault(t => t.User.Id == user.Id);
+            if (teacher != null && teacher.isAdmin)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         //
