@@ -177,6 +177,9 @@ namespace AgileProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index", "Manage");
             }
+
+            teachermodel.getCorridors = new SelectList(db.Corridors, "Id", "Name");
+
             return View(teachermodel);
         }
 
@@ -200,6 +203,9 @@ namespace AgileProject.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            teachermodel.getCorridors = new SelectList(db.Corridors, "Id", "Name");
+
             return View(teachermodel);
         }
 
