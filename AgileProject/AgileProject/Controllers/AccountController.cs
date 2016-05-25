@@ -171,10 +171,12 @@ namespace AgileProject.Controllers
 
                 //    return RedirectToAction("Index", "Teachers");
                 //}
-                return RedirectToAction("Index", "Teachers");
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Teachers");
+                }
                 AddErrors(result);
             }
-
 
             // If we got this far, something failed, redisplay form
             return View(model);
