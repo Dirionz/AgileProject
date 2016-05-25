@@ -44,19 +44,20 @@ textarea {
     box-shadow: 0 0px 2px #999797;
 }
 
+.first{
+    width: 50%;
+    float: left;
+}
+.second{
+
+}
+
 .v-align{
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.listItem {
-    height:118px;
-    padding: 15px 5px;
-	background-color: #FAFAFA;
-    border-radius: 5px;
-	margin-top:10px;
-}
 .right{
     text-align:right;
 }
@@ -102,7 +103,8 @@ h11 {
 
     background-size: cover;
 }
-.testItem{
+.listItem{
+    height:170px;
     margin:10px;
     background-color: #FAFAFA;
     border-radius: 95px;
@@ -161,16 +163,6 @@ h11 {
 .btn-group > .btn:first-child {
     width: 160px;
 }
-.dropdown-menu > li > a:hover{
-   /*background-color: rgba(255, 255, 255, 0.19);*/
-}
-.calldiv{
-    float: right;
-    margin-right: 20px;
-    height:100%;
-}
-
-
 
 
 @media only screen and (max-width: 767px) {
