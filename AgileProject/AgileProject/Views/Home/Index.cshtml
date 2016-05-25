@@ -47,30 +47,32 @@
    {
     <div class="row listItem">
         <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
-            <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10 v-align">
-                <div class="first">
-                    <p class="text-M">@status.Teacher.FirstName @status.Teacher.LastName</p>
-                    @if (@status.StatusId == 10)
-                    {
-                        @Html.Raw("Available")
-                    }
-                    else if (@status.StatusId == 20)
-                    {
-                        @Html.Raw("Busy")
-                    }
-                    else if (@status.StatusId == 30)
-                    {
-                        @Html.Raw("Busy")
-                        if (ViewBag.LoggedInUser != null)
+            <div class="v-align">
+                <div class="info1">
+                    <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
+                    <h12>
+                        @if (@status.StatusId == 10)
                         {
-                            @Html.Raw("-Students")
-
+                            @Html.Raw("Available")
                         }
-                    }
-                    else if (@status.StatusId == 40)
-                    {
-                        @Html.Raw("Away")
-                    }
+                        else if (@status.StatusId == 20)
+                        {
+                            @Html.Raw("Busy")
+                        }
+                        else if (@status.StatusId == 30)
+                        {
+                            @Html.Raw("Busy")
+                            if (ViewBag.LoggedInUser != null)
+                            {
+                                @Html.Raw("-Students")
+
+                            }
+                        }
+                        else if (@status.StatusId == 40)
+                        {
+                            @Html.Raw("Away")
+                        }
+                    </h12>
 
                     @if (status.Date != null)
                     {
@@ -78,7 +80,7 @@
                     }
                 </div>
 
-                <div class="second">
+                <div class="info2">
                     @if (status.StatusId == 10)
                     {
                         <h12 class="right"><b>@status.Teacher.PadNumber</b></h12>

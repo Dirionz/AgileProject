@@ -44,12 +44,14 @@ textarea {
     box-shadow: 0 0px 2px #999797;
 }
 
-.first{
-    width: 50%;
+.info1{
+    width: 40%;
+    margin-left:10px;
+    margin-top: -10px;
     float: left;
 }
-.second{
-
+.info2{
+  margin-right: 20px;
 }
 
 .v-align{
@@ -165,6 +167,7 @@ h11 {
 }
 
 
+
 @media only screen and (max-width: 767px) {
 
     .userInfo {
@@ -180,7 +183,7 @@ h11 {
     }
 
 }
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 600px) {
 
     h11{
         font-size:16px;
@@ -198,15 +201,15 @@ h11 {
         padding: 0px !important;
     }
 
+
     .col-md-2.image {
         width: 95px;
     }
-    .listImage {
-        min-width: 80px;
-        width: 100px;
+    .itemImage {
+        height:100px;
+        width:100px;
     }
-    
-}
+
 
 @media only screen and (max-width: 450px) {
 
