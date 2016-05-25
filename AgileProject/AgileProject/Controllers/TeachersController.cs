@@ -91,6 +91,8 @@ namespace AgileProject.Controllers
                 return RedirectToAction("Index");
             }
 
+            teachermodel.getCorridors = new SelectList(db.Corridors, "Id", "Name");
+
             return View(teachermodel);
         }
 
