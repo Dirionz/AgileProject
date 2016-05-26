@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <div class="col-md-10 nopadding">
                         <div class="">
-                            @Html.TextBoxFor(model => model.date, Model.date.Remove(Model.date.Length -3), new { @id = "min-date", @class = "inputTime", @placeholder ="Set time", @onchange = "this.form.submit();" })
+                            @Html.TextBoxFor(model => model.date, Model.date, new { @id = "min-date", @class = "inputTime", @placeholder ="Set time", @onchange = "this.form.submit();" })
                         </div>
                     </div>
                 </div>
