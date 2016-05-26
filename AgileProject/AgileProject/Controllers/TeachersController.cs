@@ -112,6 +112,10 @@ namespace AgileProject.Controllers
             {
                 return HttpNotFound();
             }
+            if (teacher.Corridor == null)
+            {
+                teacher.Corridor = new Corridor();
+            }
 
             var model = new RegisterTeacherModel()
             {
@@ -139,6 +143,10 @@ namespace AgileProject.Controllers
             if (teacher == null)
             {
                 return HttpNotFound();
+            }
+            if (teacher.Corridor == null)
+            {
+                teacher.Corridor = new Corridor();
             }
 
             var model = new RegisterTeacherModel()
