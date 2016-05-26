@@ -27,9 +27,6 @@ textarea {
 	color: red;
 }
 
-.columnTitle {
-	margin-left:150px;
-}
 .nopadding{
     padding-left:0px;
 }
@@ -43,7 +40,6 @@ textarea {
     border-radius: 5px;
     box-shadow: 0 0px 2px #999797;
 }
-
 .info1{
     width: 40%;
     margin-left:10px;
@@ -83,9 +79,6 @@ h11 {
     font-family: 'Lato', sans-serif;
 }
 
-.ddStatus {
-	margin:10px 0px;
-}
 .inputTime {
 	border-radius: 4px;
     border-style: hidden;
@@ -127,10 +120,6 @@ h11 {
     -moz-box-shadow: inset 0px 0px 0px 10px rgba(255, 247, 0, 0.56);
     box-shadow: inset 0px 0px 0px 10px rgba(255, 247, 0, 0.56);
 }
-.testText{
-    height: 150px;
-    padding: 20px;
-}
 
 .itemImage{
     float: left;
@@ -165,14 +154,6 @@ h11 {
         margin-top: 0px;
     }
 
-    .col-md-2.image {
-        width: 119px;
-    }
-    .listImage {
-        min-width: 100px;
-        width: 100px;
-    }
-
 }
 @media only screen and (max-width: 600px) {
 
@@ -184,12 +165,8 @@ h11 {
         font-size: 12px;
 
     }
-    .col-xs-6.textinfo{
-        width:40%;
-    }
     .listItem {
         height: 105px;
-        padding: 0px !important;
     }
 
     .userInfo{
@@ -204,22 +181,6 @@ h11 {
 @media only screen and (max-width: 450px) {
 
    
-    .col-xs-6.textinfo{
-        width:70%;
-    }
-    .listItem {
-        height: 105px;
-        padding: 0px !important;
-    }
-
-    .col-md-2.image {
-        display:none;
-    }
-    .listImage {
-        min-width: 80px;
-        width: 100px;
-    }
-    
 }
 
 
