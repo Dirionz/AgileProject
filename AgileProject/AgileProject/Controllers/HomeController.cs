@@ -54,7 +54,16 @@ namespace AgileProject.Controllers
 
         private Teacher getTeacherWithCorridor(Teacher teacher)
         {
-            return db.Teacher.Include("Corridor").FirstOrDefault(t => t.Id == teacher.Id);
+            var tmpteacher = db.Teacher.Include("Corridor").FirstOrDefault(t => t.Id == teacher.Id);
+            if (tmpteacher.Corridor == null)
+            {
+                tmpteacher.Corridor = new Corridor()
+                {
+                    Id = -1,
+                    Name = ""
+                };
+            }
+            return tmpteacher;
         }
 
 
