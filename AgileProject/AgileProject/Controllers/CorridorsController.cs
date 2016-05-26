@@ -68,13 +68,13 @@ namespace AgileProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name")] Corridor corridor)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && db.Corridors.Count(c => c.Name == corridor.Name) == 0)
             {
                 db.Corridors.Add(corridor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ModelState.AddModelError("Name", new Exception("Corridor exists!"));
             return View(corridor);
         }
 
