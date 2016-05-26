@@ -94,17 +94,6 @@ h11 {
 	outline:none;
 }
 
-.col-md-2.image {
-    width: 155px;
-    height: 90px;
-    margin-left: 10px;
-
-    -ms-background-position-x: center;
-    -ms-background-position-y: bottom;
-    background-position: center bottom;
-
-    background-size: cover;
-}
 .listItem{
     height:170px;
     margin:10px;
@@ -144,6 +133,8 @@ h11 {
 }
 
 .itemImage{
+    float: left;
+    border-radius: 95px;
     height: 170px;
     width: 170px;
     background-position: center bottom;
@@ -201,9 +192,8 @@ h11 {
         padding: 0px !important;
     }
 
-
-    .col-md-2.image {
-        width: 95px;
+    .userInfo{
+        height: 140px;
     }
     .itemImage {
         height:100px;

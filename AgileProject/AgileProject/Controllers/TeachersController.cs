@@ -84,7 +84,7 @@ namespace AgileProject.Controllers
                     Email = teachermodel.Email,
                     Corridor = corridor,
                     User = user,
-                    imageURL = "../images/default.jpg"
+                    imageURL = "/images/default.jpg"
                 });
                 db.SaveChanges();
                 SetStatus();
@@ -313,8 +313,7 @@ namespace AgileProject.Controllers
             status = new Status()
             {
                 StatusId = 10,
-                Teacher = teacher,
-                Date = DateTime.Now
+                Teacher = teacher
             };
             db.Status.Add(status);
 

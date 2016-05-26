@@ -6,9 +6,9 @@
 @if (ViewBag.LoggedInUser != null)
 {
     <div class="row userInfo">
-        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@Model.statusId" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
+        <div class="itemImage status-@Model.statusId" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
 
-        <div class="col-xs-6 col-sm-7 col-md-8 col-lg-10 v-align">
+        <div class="v-align info1">
             <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
 
             @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
@@ -46,7 +46,7 @@
    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
    {
     <div class="row listItem">
-        <div class="col-xs-3 col-sm-3 col-md-5 col-lg-5 image img responsive img-rounded itemImage avatarImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
+        <div class="image img responsive itemImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
             <div class="v-align">
                 <div class="info1">
                     <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
@@ -76,7 +76,7 @@
 
                     @if (status.Date != null)
                     {
-                        <h12><b>@status.Date</b></h12>
+                        <h12><b>Back at: @status.Date</b></h12>
                     }
                 </div>
 
