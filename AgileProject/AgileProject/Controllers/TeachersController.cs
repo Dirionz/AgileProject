@@ -23,7 +23,15 @@ namespace AgileProject.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(db.Teacher.ToList());
+            var teachers = db.Teacher.Include("Corridor").ToList();
+            foreach (var teacher in teachers)
+            {
+                if (teacher.Corridor == null)
+                {
+                    teacher.Corridor = new Corridor();
+                }
+            }
+            return View(teachers);
         }
 
         // GET: Teachers/Details/5

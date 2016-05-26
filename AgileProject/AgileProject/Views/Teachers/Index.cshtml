@@ -35,6 +35,9 @@
         <th>
             @Html.DisplayNameFor(model => model.isAdmin)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corridor.Name)
+        </th>
         <th></th>
     </tr>
 
@@ -55,8 +58,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.Email)
         </td>
-                <td>
+        <td>
             @Html.DisplayFor(modelItem => item.isAdmin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Corridor.Name)
         </td>
         <td>
             @Html.ActionLink("Edit", "Editall", new { id=item.Id }) |
