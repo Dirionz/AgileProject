@@ -8,22 +8,21 @@
     <div class="row userInfo">
         <div class="itemImage status-@Model.statusId" style="background-image: url(@ViewBag.teacher.imageURL); background-repeat: no-repeat;"></div>
 
-        <div class="v-align info1">
+        <div class="v-align" style="margin-left:10px; float:left;">
             <h11>@ViewBag.teacher.FirstName @ViewBag.teacher.LastName</h11>
 
             @using (Html.BeginForm("ChangeStatus", "Home", FormMethod.Post))
                 {
                 @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <div class="col-md-10 nopadding">
+                <div>
+                    <div class="col-md-10 nopadding" style="margin:5px 0px;">
                         <div class="">
                             @Html.DropDownListFor(model => model.statusId, Model.getStatus, new { @class = "btn btn-primary btn-status dropdown-toggle setcolours", @onchange = "this.form.submit();" })
                         </div>
                     </div>
                 </div>
             }
-            <br>
             @using (Html.BeginForm("ChangeTime", "Home", FormMethod.Post))
                 {
                 @Html.AntiForgeryToken()
@@ -32,7 +31,6 @@
                 <div class="form-group">
                     <div class="col-md-10 nopadding">
                         <div class="">
-                            @Html.TextBoxFor(model => model.date, Model.date, new { @id = "min-date", @class = "inputTime", @onchange = "this.form.submit();" })
                         </div>
                     </div>
                 </div>
@@ -76,7 +74,7 @@
 
                     @if (status.Date != null)
                     {
-                        <h12><b>Back at: @status.Date</b></h12>
+                        <h12><b>Back at: @status.Date.Value.ToShortDateString() @status.Date.Value.ToShortTimeString()</b></h12>
                     }
                 </div>
 

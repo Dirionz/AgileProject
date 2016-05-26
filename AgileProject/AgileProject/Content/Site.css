@@ -85,6 +85,7 @@ h11 {
     padding: 5px;
     visibility: collapse;
 	outline:none;
+    width: 150px;
 }
 
 .listItem{
