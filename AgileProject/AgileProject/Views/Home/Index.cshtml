@@ -44,50 +44,47 @@
 
    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
    {
-    <div class="row listItem">
+    <div class="row listItem" id="@status.Teacher.Id">
         <div class="itemImage status-@status.StatusId" style="background-image: url(@status.Teacher.imageURL); background-repeat: no-repeat;"></div>
-            <div class="v-align">
-                <div class="info1">
-                    <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
-                    <h12>
-                        @if (@status.StatusId == 10)
-                        {
-                            @Html.Raw("Available")
-                        }
-                        else if (@status.StatusId == 20)
-                        {
-                            @Html.Raw("Busy")
-                        }
-                        else if (@status.StatusId == 30)
-                        {
-                            @Html.Raw("Busy")
-                            if (ViewBag.LoggedInUser != null)
-                            {
-                                @Html.Raw("-Students")
-
-                            }
-                        }
-                        else if (@status.StatusId == 40)
-                        {
-                            @Html.Raw("Away")
-                        }
-                    </h12>
-
-                    @if (status.Date != null)
+            <div class="v-align info1">
+                <h11>@status.Teacher.FirstName @status.Teacher.LastName</h11>
+                <h12>
+                    @if (@status.StatusId == 10)
                     {
-                        <h12><b>Back at: @status.Date.Value.ToShortDateString() @status.Date.Value.ToShortTimeString()</b></h12>
+                        @Html.Raw("Available")
                     }
-                </div>
-
-                <div class="info2">
-                    @if (status.StatusId == 10)
+                    else if (@status.StatusId == 20)
                     {
-                        <h12 class="right"><b>@status.Teacher.PadNumber</b></h12>
+                        @Html.Raw("Busy")
                     }
-                    <h12 class="right">@status.Teacher.Email</h12>
-                    <h12 class="right">@status.Teacher.Phone</h12>
-                </div>
+                    else if (@status.StatusId == 30)
+                    {
+                        @Html.Raw("Busy")
+                        if (ViewBag.LoggedInUser != null)
+                        {
+                            @Html.Raw("-Students")
 
+                        }
+                    }
+                    else if (@status.StatusId == 40)
+                    {
+                        @Html.Raw("Away")
+                    }
+                </h12>
+
+                @if (status.Date != null)
+                {
+                    <h12><b>Back at: @status.Date.Value.ToShortDateString() @status.Date.Value.ToShortTimeString()</b></h12>
+                }
+            </div>
+
+            <div class="v-align info2">
+                @if (status.StatusId == 10)
+                {
+                    <h12 class="right"><b>@status.Teacher.PadNumber</b></h12>
+                }
+                <h12 class="right">@status.Teacher.Email</h12>
+                <h12 class="right">@status.Teacher.Phone</h12>
             </div>
         </div>
    }
@@ -102,7 +99,7 @@
 
         var selText = $(".setcolours option:selected").val();
 
-;            if (selText == 10) {
+        ;            if (selText == 10) {
             $('.setcolours').css('background-color', 'rgba(81,202,66,1)');
             $('.setcolours').css('border-color', 'rgb(53, 189, 80)');
         }
@@ -112,7 +109,7 @@
             $('.inputTime').css('visibility', 'visible');
         }
         else if (selText == 40) {
-               
+
             $('.btn-status').css('background-color', 'rgb(202, 201, 66)');
             $('.btn-status').css('border-color', 'rgb(202, 170, 66)');
             $('.inputTime').css('visibility', 'visible');
