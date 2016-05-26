@@ -20,7 +20,6 @@ namespace AgileProject.Models
         [Required]
         [StringLength(30, MinimumLength = 1)]
         public string Phone { get; set; }
-        [Required]
         public int corridorId { get; set; }
         public ApplicationUser User { get; set; }
         public bool isAdmin { get; set; }
