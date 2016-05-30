@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
-
+@*User panel*@
 @if (ViewBag.LoggedInUser != null)
 {
     <div class="row userInfo">
@@ -41,7 +41,9 @@
 
 }
 
+@*////////////END -User panel*@
 
+@*StatusList*@
    @foreach (AgileProject.Models.Status status in ViewBag.statusList)
    {
     <div class="row listItem" id="@status.Teacher.Id">
@@ -88,7 +90,7 @@
             </div>
         </div>
    }
-       
+@*///////////END Statuslist*@
 
 
 <script>
@@ -97,6 +99,8 @@
 
         $('#min-date').bootstrapMaterialDatePicker({ format: 'DD/MM/YYYY HH:mm', minDate: new Date() });
 
+
+        //Changes the color of the dropdownmenu
         var selText = $(".setcolours option:selected").val();
 
         ;            if (selText == 10) {
@@ -114,6 +118,8 @@
             $('.btn-status').css('border-color', 'rgb(202, 170, 66)');
             $('.inputTime').css('visibility', 'visible');
         }
+
+       
     });
 
 </script>

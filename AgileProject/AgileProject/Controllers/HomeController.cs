@@ -12,7 +12,8 @@ namespace AgileProject.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-
+        //Home/Index/"Corridorname"
+        //Display the teachers from that specific corridor
         public ActionResult Index(string id)
         {
             var statusList = db.Status.Include("Teacher").OrderBy(s => s.Teacher.LastName).ThenBy(st => st.Teacher.FirstName).ToList();
@@ -52,6 +53,7 @@ namespace AgileProject.Controllers
             return View();
         }
 
+        //Fetching the teachers from a corridor
         private Teacher getTeacherWithCorridor(Teacher teacher)
         {
             var tmpteacher = db.Teacher.Include("Corridor").FirstOrDefault(t => t.Id == teacher.Id);
@@ -66,7 +68,7 @@ namespace AgileProject.Controllers
             return tmpteacher;
         }
 
-
+        //Set the dropdown menu values
         private IEnumerable<SelectListItem> getStatuses()
         {
             var list = new List<SelectListItem>();
@@ -78,6 +80,7 @@ namespace AgileProject.Controllers
             return list;
         }
 
+        //POST - Change a teacher status
         [HttpPost]
         public ActionResult ChangeStatus(PostStatusModel model)
         {
@@ -104,6 +107,7 @@ namespace AgileProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //Set the time when available
         public ActionResult ChangeTime(PostStatusModel model)
         {
             var user = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);

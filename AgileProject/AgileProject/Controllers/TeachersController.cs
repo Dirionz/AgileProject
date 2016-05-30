@@ -105,6 +105,7 @@ namespace AgileProject.Controllers
         }
 
         // GET: Teachers/Edit/5
+        // Admin edit teachers
         public ActionResult Editall(int? id)
         {
             if (!IsAdminHelper.isAdminBackend(User.Identity.Name))
@@ -144,6 +145,7 @@ namespace AgileProject.Controllers
 
 
         // GET: Teachers/Edit
+        // Edit own profile
         public ActionResult Edit()
         {
 
@@ -266,7 +268,7 @@ namespace AgileProject.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Teachers/Edit/5
+        // Upload image to teacher
         public ActionResult UploadImage()
         {
 
@@ -293,9 +295,6 @@ namespace AgileProject.Controllers
                 // file is uploaded
                 file.SaveAs(path);
 
-                // save the image path path to the database or you can send image 
-                // directly to database
-                // in-case if you want to store byte[] ie. for DB
                 using (MemoryStream ms = new MemoryStream())
                 {
                     file.InputStream.CopyTo(ms);
@@ -311,9 +310,6 @@ namespace AgileProject.Controllers
 
 
             }
-
-
-
             // after successfully uploading redirect the user
             return RedirectToAction("Index", "Manage");
         }
